@@ -1,29 +1,31 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./style.css";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 
 export class Register extends Component {
   state = {
     userName: "",
     userID: "",
     password: "",
-    department:""
+    department: ""
   };
 
   onSubmit = e => {
     const user = {
-      userID : this.state.userID,
+      userID: this.state.userID,
       userName: this.state.userName,
       department: this.state.department,
       password: this.state.password
     };
     var apiUrl = "http://localhost:5000";
     axios
-      .post(apiUrl+"/user/Register", user)
+      .post(apiUrl + "/user/Register", user)
       .then(res => {
         if (res.status === 200) {
           console.log(res);
-          this.props.history.push("/login")
+          this.props.history.push("/login");
         }
       })
       .catch(err => {
@@ -35,6 +37,7 @@ export class Register extends Component {
   };
 
   render() {
+    const departments = ["CSE", "ECE", "MECH", "CIVIL"];
     return (
       <div className="form">
         <div className="form-in">
@@ -63,12 +66,12 @@ export class Register extends Component {
             onChange={this.onChange}
           />
           <br />
-          <input
-            className="input"
-            name="department"
-            type="text"
-            placeholder="Enter Deparment"
-            onChange={this.onChange}
+          <Dropdown
+            options={departments}
+            value={this.state.department}
+            onChange={e => {
+              this.setState({ department: e.value });
+            }}
           />
           <br />
           <button className="button" onClick={this.onSubmit}>
