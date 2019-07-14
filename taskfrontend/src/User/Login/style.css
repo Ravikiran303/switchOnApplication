@@ -1,0 +1,23 @@
+.form {
+  margin-top: 8%;
+}
+.form-in {
+  max-width: 300px;
+  margin: auto;
+  border: 10px;
+  padding: 15px;
+}
+.input,
+textarea,
+button,
+h2 {
+  display: block;
+  width: 100%;
+  height: 30px;
+}
+.button-register {
+  display: block;
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
+}
