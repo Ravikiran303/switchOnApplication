@@ -15,6 +15,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
+          {/* <Route path="/" component={}/> */}
           <Route exact path="/login" component={Login} />
           <Route exact path="/Register" component={Register} />
           <PrivateRoute exact path="/home" component={Home} />
