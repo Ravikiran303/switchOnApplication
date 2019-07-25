@@ -18,9 +18,11 @@ export class Login extends Component {
     axios
       .post(apiUrl + "/user/login", user)
       .then(res => {
-        console.log(res.data);
-        localstorage.set("auth_token", res.data.auth_token);
-        this.props.history.push("/home");
+        if (!res.err) {
+          localstorage.set("userID", this.state.userID);
+          localstorage.set("auth_token", res.data.auth_token);
+          this.props.history.push("/form");
+        }
       })
       .catch(err => {
         alert("authentication failed");
@@ -45,7 +47,7 @@ export class Login extends Component {
             placeholder="Enter userID"
             onChange={this.onChange}
           />
-          <br />
+
           <input
             className="input"
             name="password"
@@ -53,7 +55,6 @@ export class Login extends Component {
             placeholder="Enter Password"
             onChange={this.onChange}
           />
-          <br />
           <button onClick={this.onSubmit} className="button">
             Signin
           </button>

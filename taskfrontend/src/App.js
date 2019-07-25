@@ -7,18 +7,24 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-import Home from "./Home/Home";
+
 import localStorage from "local-storage";
+import PendingReq from "./PendingReq/PendingReq";
+import Form from "./Form/Form";
+import Requests from "./Requests/Requests";
+import AcceptedList from "./AcceptedList/AcceptedList";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          {/* <Route path="/" component={}/> */}
-          <Route exact path="/login" component={Login} />
+          <PrivateRoute path="/accepted" component={AcceptedList} />
+          <PrivateRoute path="/form" component={Form} />
+          <PrivateRoute path="/requests" component={Requests} />
+          <PrivateRoute path="/pending" component={PendingReq} />
+          <Route exact path="/" component={Login} />
           <Route exact path="/Register" component={Register} />
-          <PrivateRoute exact path="/home" component={Home} />
         </Switch>
       </Router>
     </div>
@@ -32,9 +38,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
       localStorage.get("auth_token") ? (
         <Component {...props} />
       ) : (
-        <Redirect
-          to={{ pathname: "/login", state: { from: props.location } }}
-        />
+        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
       )
     }
   />

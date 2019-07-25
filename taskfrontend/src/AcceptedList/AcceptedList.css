@@ -1,0 +1,23 @@
+.rt-thead {
+  height: 40px;
+  padding-top: 5px;
+  background-color: burlywood;
+}
+.rt-tr {
+  height: 40px;
+  padding-top: 5px;
+}
+
+.-even {
+  background-color: #bcebbc;
+}
+
+.-odd {
+  background-color: #e3e3e3;
+}
+
+.-next,
+.-previous {
+  background-color: #36c8e9;
+  color: white;
+}

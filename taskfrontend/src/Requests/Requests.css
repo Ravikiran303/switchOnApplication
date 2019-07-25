@@ -1,0 +1,8 @@
+.req_buttons {
+  width: 50px;
+  margin: auto;
+  display: flex;
+}
+.req_buttons button {
+  margin-left: 10px;
+}

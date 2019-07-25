@@ -1,8 +1,18 @@
-.form {
+.form_1 {
   width: 600px;
+
   margin: auto;
 }
 input {
-  width: 600px;
+  width: 340px;
   height: 30px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+button {
+  width: 200px;
+  margin-left: 100px;
+}
+body {
+  margin: 0px;
 }

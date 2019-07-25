@@ -4,6 +4,7 @@ const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 var mongoose = require("mongoose");
+const Form = require("../../models/Form");
 
 router.post("/user/Register", (req, res) => {
   const details = {
@@ -56,5 +57,58 @@ router.get("/department/:department/users", (req, res) => {
   User.find({ department: req.params.department }).then(responce => {
     res.send(responce);
   });
+  var id = mongoose.Types.ObjectId(req.params.id);
+});
+router.post("/form", (req, res) => {
+  const submitedForm = {
+    requestedUserID: req.body.requested_userID,
+    requestedUserDept: req.body.requestedUserDept,
+    req_to_department: req.body.department,
+    send_to: req.body.selectedUser,
+    message: req.body.Message
+  };
+  Form.create(submitedForm).then(result => {
+    res.send(result);
+  });
+});
+router.get("/users/:id", (req, res) => {
+  User.findOne({ userID: req.params.id }).then(responce => {
+    res.send(responce);
+  });
+});
+
+router.get("/users/:id/pending", (req, res) => {
+  Form.find({ requestedUserID: req.params.id }).then(responce => {
+    res.send(responce);
+  });
+});
+router.get("/users/:department/requests", (req, res) => {
+  Form.find({
+    status: "PENDING",
+    req_to_department: req.params.department
+  }).then(responce => {
+    res.send(responce);
+  });
+});
+router.put("/forms/:id/accept", (req, res) => {
+  Form.updateOne({ _id: req.params.id }, { $set: { status: "ACCEPTED" } }).then(
+    responce => {
+      res.send(responce);
+    }
+  );
+});
+router.put("/forms/:id/reject", (req, res) => {
+  Form.updateOne({ _id: req.params.id }, { $set: { status: "REJECTED" } }).then(
+    responce => {
+      res.send(responce);
+    }
+  );
+});
+router.get("/users/:id/acceptedBy", (req, res) => {
+  Form.find({ status: "ACCEPTED", requestedUserID: req.params.id }).then(
+    responce => {
+      res.send(responce);
+    }
+  );
 });
 module.exports = router;

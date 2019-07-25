@@ -2,9 +2,6 @@ const express = require("express");
 const app = express();
 const port = 5000;
 
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-
 var mongoose = require("mongoose");
 const mongoURI = "mongodb://localhost:27017/switchon";
 

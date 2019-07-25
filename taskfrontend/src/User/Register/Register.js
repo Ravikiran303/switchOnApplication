@@ -24,8 +24,8 @@ export class Register extends Component {
       .post(apiUrl + "/user/Register", user)
       .then(res => {
         if (res.status === 200) {
-          console.log(res);
-          this.props.history.push("/login");
+          alert("Registered Successfully");
+          this.props.history.push("/");
         }
       })
       .catch(err => {
@@ -40,7 +40,7 @@ export class Register extends Component {
     const departments = ["CSE", "ECE", "MECH", "CIVIL"];
     return (
       <div className="form">
-        <div className="form-in">
+        <div className="form-in1">
           <h2>REGISTER</h2>
           <input
             className="input"
@@ -49,7 +49,7 @@ export class Register extends Component {
             placeholder="Enter userID"
             onChange={this.onChange}
           />
-          <br />
+
           <input
             className="input"
             name="userName"
@@ -57,7 +57,7 @@ export class Register extends Component {
             type="text"
             onChange={this.onChange}
           />
-          <br />
+
           <input
             className="input"
             name="password"
@@ -65,7 +65,7 @@ export class Register extends Component {
             placeholder="Enter Password"
             onChange={this.onChange}
           />
-          <br />
+
           <Dropdown
             options={departments}
             value={this.state.department}
@@ -73,7 +73,7 @@ export class Register extends Component {
               this.setState({ department: e.value });
             }}
           />
-          <br />
+
           <button className="button" onClick={this.onSubmit}>
             Register
           </button>
